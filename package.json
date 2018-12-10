@@ -2,7 +2,6 @@
   "name": "talquei",
   "version": "0.1.0",
   "description": "Vue components to build webforms looking like a conversation.",
-  "repository": "github:luciorubeens/talquei",
   "main": "./dist/talquei.cjs.js",
   "module": "./dist/talquei.es.js",
   "cdn": "./dist/talquei.js",
@@ -20,7 +19,8 @@
     "example": "poi --serve",
     "gh": "npm run build:example && gh-pages -d example/dist",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "jest"
   },
   "keywords": [
     "vue",
@@ -34,21 +34,32 @@
     "name": "Lúcio Rubens",
     "email": "luciorubeens@gmail.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luciorubeens/talquei.git"
+  },
   "dependencies": {
     "vue-typed-js": "^0.1.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.0",
     "@poi/plugin-eslint": "^12.0.0",
+    "@vue/test-utils": "^1.0.0-beta.27",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "bili": "^3.4.2",
     "eslint": "^5.10.0",
     "eslint-config-posva": "^2.0.3",
     "gh-pages": "^2.0.1",
+    "jest": "^23.6.0",
     "node-sass": "^4.11.0",
     "poi": "^12.0.2",
     "postcss-preset-env": "^6.4.0",
+    "regenerator-runtime": "^0.13.1",
     "rollup-plugin-vue": "^4.3.2",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.19",
+    "vue-jest": "^3.0.1",
     "vue-template-compiler": "^2.5.19"
   }
 }

@@ -1,6 +1,7 @@
 node_modules/
 dist/
 example/dist
+tests/.coverage
 
 .DS_Store
 *.log

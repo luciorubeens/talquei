@@ -108,6 +108,8 @@ export default {
     },
 
     runMessage (message) {
+      if (!message) return
+
       message.run()
     },
   },
