@@ -85,8 +85,6 @@
 import { EditorWindow } from 'vue-windows'
 import hljs from 'highlight.js/lib/highlight'
 import logoImage from './logo.png'
-import 'vue-windows/dist/vue-windows.css'
-import 'highlight.js/styles/androidstudio.css'
 
 hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'))
 
@@ -125,6 +123,8 @@ new Vue({
 }
 </script>
 
+<style src="vue-windows/dist/vue-windows.css"></style>
+<style src="highlight.js/styles/androidstudio.css"></style>
 <style>
 body {
   background-color: #16a085;
