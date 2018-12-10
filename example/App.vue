@@ -56,7 +56,7 @@
 <script>
 import { EditorWindow, BrowserWindow } from 'vue-windows'
 import hljs from 'highlight.js/lib/highlight'
-import logoImage from './assets/logo.png'
+import logoImage from './logo.png'
 import "vue-windows/dist/vue-windows.css"
 import 'highlight.js/styles/androidstudio.css'
 
