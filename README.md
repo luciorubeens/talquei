@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="./.github/example.gif" width="35%"/>
+  <img src="./.github/example.gif" width="45%"/>
 </p>
 
 ## 🧐 Why?
@@ -180,9 +180,9 @@ export default {
 
 #### Slots
 
-| Name      | Description                                                   |
-| --------- | ------------------------------------------------------------- |
-| `default` | Insert your `TalqueiMessage` here. Don't need a root element. |
+| Name      | Description                                                  |
+| --------- | ------------------------------------------------------------ |
+| `default` | Insert your `TalqueiMessage` here. Don't need a root element |
 
 #### Methods
 
@@ -205,7 +205,7 @@ Search the next message. Nested messages will inject this method to call when fi
 | `text`    | Text to be displayed, if `isUser` will not be typed | `String`  | `null`  |
 | `value`   | Useful only for use in `v-model`                    | `String`  | `null`  |
 
-**`input` object**
+##### `input` object
 
 Will create a basic form from the `tag` informed, should not be defined if you prefer to use the slot.
 
