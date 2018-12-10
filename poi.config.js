@@ -1,11 +1,16 @@
 module.exports = {
   entry: 'example/index.js',
   output: {
-    dir: 'example/dist'
+    dir: 'example/dist',
   },
+  plugins: [
+    {
+      resolve: '@poi/plugin-eslint',
+    },
+  ],
   configureWebpack: {
     resolve: {
-      extensions: ['.js', '.vue', '.css']
-    }
-  }
+      extensions: ['.js', '.vue', '.css'],
+    },
+  },
 }

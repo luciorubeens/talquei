@@ -7,7 +7,7 @@ module.exports = {
   filename: 'talquei[suffix].js',
   plugins: [
     vue({
-      css: false
-    })
-  ]
+      css: false,
+    }),
+  ],
 }

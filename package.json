@@ -1,7 +1,7 @@
 {
   "name": "talquei",
   "version": "0.1.0",
-  "description": "Vue component to build webforms looking like a conversation.",
+  "description": "Vue components to build webforms looking like a conversation.",
   "repository": "github:luciorubeens/talquei",
   "main": "./dist/talquei.cjs.js",
   "module": "./dist/talquei.es.js",
@@ -9,14 +9,17 @@
   "jsdelivr": "./dist/talquei.js",
   "unpkg": "./dist/talquei.js",
   "files": [
-    "dist"
+    "src",
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "build:example": "poi --prod",
     "build": "bili",
     "example": "poi --serve",
     "gh": "npm run build:example && gh-pages -d example/dist",
-    "lint": "xo",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -31,9 +34,14 @@
     "name": "Lúcio Rubens",
     "email": "luciorubeens@gmail.com"
   },
+  "dependencies": {
+    "vue-typed-js": "^0.1.2"
+  },
   "devDependencies": {
+    "@poi/plugin-eslint": "^12.0.0",
     "bili": "^3.4.2",
-    "eslint-config-rem": "^4.0.0",
+    "eslint": "^5.10.0",
+    "eslint-config-posva": "^2.0.3",
     "gh-pages": "^2.0.1",
     "node-sass": "^4.11.0",
     "poi": "^12.0.2",
@@ -41,19 +49,6 @@
     "rollup-plugin-vue": "^4.3.2",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.19",
-    "vue-template-compiler": "^2.5.19",
-    "xo": "^0.23.0"
-  },
-  "xo": {
-    "extends": "rem",
-    "envs": [
-      "browser"
-    ],
-    "ignores": [
-      "example/**"
-    ]
-  },
-  "dependencies": {
-    "vue-typed-js": "^0.1.2"
+    "vue-template-compiler": "^2.5.19"
   }
 }

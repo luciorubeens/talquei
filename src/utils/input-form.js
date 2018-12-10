@@ -17,9 +17,9 @@ export default (ctx, options, model) => {
   return {
     name: 'InputForm',
     directives: {
-      'focus': {
-        inserted: (el) => el.focus()
-      }
+      focus: {
+        inserted: (el) => el.focus(),
+      },
     },
 
     render (h) {
@@ -28,11 +28,11 @@ export default (ctx, options, model) => {
       const submitButton = cb => h('button', {
         class: 'talquei-form__submit',
         attrs: {
-          type: 'submit'
+          type: 'submit',
         },
         on: {
-          click: () => emit(cb())
-        }
+          click: () => emit(cb()),
+        },
       }, 'Ok')
 
       if (options.type === 'text') {
@@ -41,27 +41,27 @@ export default (ctx, options, model) => {
             class: ['talquei-form__text'],
             attrs: options,
             ref: 'text',
-            directives: [{ name: 'focus' }]
+            directives: [{ name: 'focus' }],
           }),
-          submitButton(() => this.$refs.text.value)
+          submitButton(() => this.$refs.text.value),
         ]
       } else if (options.type === 'select') {
         const itemsKeys = Object.keys(options.items)
         inputEl = [h('div', {
-          class: ['talquei-form__select']
+          class: ['talquei-form__select'],
         },
-          itemsKeys.map((key, index) =>
-            h('button', {
-              attrs: {
-                type: 'submit'
-              },
-              class: 'talquei-form__select__item',
-              on: {
-                click: () => emit(options.items[key]),
-              },
-              directives: [index === 0 ? { name: 'focus'} : {}] // focus first item
-            }, options.items[key])
-          )
+        itemsKeys.map((key, index) =>
+          h('button', {
+            attrs: {
+              type: 'submit',
+            },
+            class: 'talquei-form__select__item',
+            on: {
+              click: () => emit(options.items[key]),
+            },
+            directives: [index === 0 ? { name: 'focus' } : {}], // focus first item
+          }, options.items[key])
+        )
         )]
       }
 
@@ -69,10 +69,10 @@ export default (ctx, options, model) => {
         class: 'talquei-form',
         on: {
           submit: (evt) => {
-            evt.preventDefault();
-          }
-        }
+            evt.preventDefault()
+          },
+        },
       }, inputEl)
-    }
+    },
   }
 }

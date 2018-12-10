@@ -3,8 +3,8 @@
   <section class="talquei">
     <div
       ref="terminal"
-      class="talquei-terminal"
       v-scroll-down
+      class="talquei-terminal"
     >
       <slot />
     </div>
@@ -27,45 +27,45 @@ export default {
   name: 'Talquei',
 
   directives: {
-    'scroll-down': scrollDown
+    'scroll-down': scrollDown,
   },
 
   provide () {
     return {
       next: this.next,
-      showInput: this.showInput
+      showInput: this.showInput,
     }
+  },
+
+  components: {
+    VNodes,
   },
 
   props: {
     autoRun: {
       type: Boolean,
       required: false,
-      default: true
-    }
-  },
-
-  components: {
-    VNodes
+      default: true,
+    },
   },
 
   data: () => ({
     step: null,
     inputNode: null,
-    messages: []
+    messages: [],
   }),
 
   computed: {
     totalSteps () {
       return this.messages.length
-    }
+    },
   },
 
   watch: {
     step (val) {
       this.inputNode = null
       this.runMessage(this.messages[val])
-    }
+    },
   },
 
   mounted () {
@@ -109,7 +109,7 @@ export default {
 
     runMessage (message) {
       message.run()
-    }
-  }
+    },
+  },
 }
 </script>

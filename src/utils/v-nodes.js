@@ -4,8 +4,8 @@ export default {
   props: {
     vnodes: {
       type: [Array, Object],
-      required: true
-    }
+      required: true,
+    },
   },
 
   render: (h, { props }) => {
@@ -14,5 +14,5 @@ export default {
       return nodes
     }
     return h(nodes)
-  }
+  },
 }

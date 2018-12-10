@@ -4,7 +4,8 @@ import VTalquei from '../src'
 
 Vue.use(VTalquei)
 
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
-  render: h => h(App)
+  render: h => h(App),
 })

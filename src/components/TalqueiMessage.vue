@@ -5,7 +5,9 @@
     class="talquei-message"
   >
     <div class="talquei-message__avatar">
-      <span v-if="!isUser">🤖</span>
+      <span v-if="!isUser">
+        🤖
+      </span>
     </div>
 
     <div class="talquei-message__text">
@@ -35,40 +37,40 @@ export default {
 
   inject: ['next', 'showInput'],
 
-  model: {
-    prop: 'value',
-    event: 'input'
+  components: {
+    VueTypedJs,
   },
 
-  components: {
-    VueTypedJs
+  model: {
+    prop: 'value',
+    event: 'input',
   },
 
   props: {
     isUser: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     text: {
       type: String,
       required: true,
-      default: ''
+      default: '',
     },
     input: {
       type: Object,
       required: false,
-      default: null
+      default: null,
     },
     value: {
       type: String,
       required: false,
-      default: null
-    }
+      default: null,
+    },
   },
 
   data: () => ({
-    isPending: true
+    isPending: true,
   }),
 
   watch: {
@@ -76,14 +78,14 @@ export default {
       if (!val && this.isUser) {
         setTimeout(() => this.next(), 1000)
       }
-    }
+    },
   },
 
   methods: {
     onCompleteTyping () {
       if (this.$slots.default) {
         this.showInput(this.$slots.default)
-      } else if (!!this.input) {
+      } else if (this.input) {
         const inputComponent = InputForm(this, this.input, this.$options.model)
         this.showInput(inputComponent)
       } else {
@@ -93,7 +95,7 @@ export default {
 
     run () {
       this.isPending = false
-    }
-  }
+    },
+  },
 }
 </script>
