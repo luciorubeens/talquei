@@ -74,7 +74,7 @@ You can request a user entry by prop or slot. The prop will basically inject you
     <TalqueiMessage
       v-model="name"
       text="What's your name?"
-      :input="{ type: 'text' }"
+      :input="{ tag: 'text' }"
     />
   </Talquei>
 </template>
@@ -90,7 +90,7 @@ export default {
 
 ### Predefined answers
 
-If you need predefined answers (such as the `select` or `radio` tag) you can set `input.type = 'select'` and pass your object in the `items` field:
+If you need predefined answers (such as the `select` or `radio` tag) you can set `input.type = 'select'` and pass your object in the `options` field:
 
 ```vue
 <template>
@@ -98,7 +98,7 @@ If you need predefined answers (such as the `select` or `radio` tag) you can set
     <TalqueiMessage
       v-model="name"
       text="Which front-end framework do you prefer?"
-      :input="{ type: 'select', items: frameworks }"
+      :input="{ tag: 'select', options: frameworks }"
     />
   </Talquei>
 </template>
@@ -126,14 +126,14 @@ Use when you want the `v-if` attribute to display conditional messages:
     <TalqueiMessage
       v-model="answer"
       text="Which front-end framework do you prefer?"
-      :input="{ type: 'select', items: frameworks }"
+      :input="{ tag: 'select', options: frameworks }"
     />
 
     <TalqueiMessage
       v-if="answer === 'vue'"
       v-model="plugin"
       text="What plugins do you usually use in your projects?"
-      :input="{ type: 'text', placeholder: 'talquei' }"
+      :input="{ tag: 'text', placeholder: 'talquei' }"
     />
   </Talquei>
 </template>
@@ -168,10 +168,58 @@ export default {
 </script>
 ```
 
-## 🔎   API
+## 🔎 API
 
-Coming soon
+### `Talquei` component
 
-## 🕺 Contribute
+#### Props
 
-If you want to contribute to this project, please see our [Contributing Guide](/.github/CONTRIBUTING.md) !
+| Name      | Description                          | Type      | Default |
+| --------- | ------------------------------------ | --------- | ------- |
+| `autoRun` | Starts the conversation when mounted | `Boolean` | `true`  |
+
+#### Slots
+
+| Name      | Description                                                   |
+| --------- | ------------------------------------------------------------- |
+| `default` | Insert your `TalqueiMessage` here. Don't need a root element. |
+
+#### Methods
+
+**`init(): void`**
+
+Use this method to start the conversation if you set `autoRun` to `false`.
+
+**`next(): void`**
+
+Search the next message. Nested messages will inject this method to call when finalizing typing.
+
+### `TalqueiMessage` component
+
+#### Props
+
+| Name      | Description                                         | Type      | Default |
+| --------- | --------------------------------------------------- | --------- | ------- |
+| `input  ` | Request a user input [See details](#input-object)   | `Object`  | `null`  |
+| `isUser`  | Define as a message written by the user             | `Boolean` | `false` |
+| `text`    | Text to be displayed, if `isUser` will not be typed | `String`  | `null`  |
+| `value`   | Useful only for use in `v-model`                    | `String`  | `null`  |
+
+**`input` object**
+
+Will create a basic form from the `tag` informed, should not be defined if you prefer to use the slot.
+
+- `tag`: Valid tags are currently `text` or `select`.
+- `options` (`select`):  Use this field to define an `object` with the available options.
+- `placeholder` (`text`): Set the placeholder of your input field.
+- `type` (`text`): Set the type of your input field. Default is `text`.
+
+#### Slots
+
+| Name      | Description                                                  |
+| --------- | ------------------------------------------------------------ |
+| `default` | Use this if you need more complex or personalized user input |
+
+## 🤝 Contribute
+
+If you want to contribute to this project, please see our [Contributing Guide](/.github/CONTRIBUTING.md).

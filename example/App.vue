@@ -48,7 +48,7 @@
       >
         <TalqueiMessage
           v-model="name"
-          :input="{ type: 'text', placeholder: 'Enter your name' }"
+          :input="{ tag: 'text', placeholder: 'Enter your name' }"
           text="Hi there! What's your name?"
         />
         <TalqueiMessage
@@ -58,7 +58,7 @@
         <TalqueiMessage
           v-model="occupation"
           :text="`Great to meet you, ${name}! I'm a web form, what do you do?`"
-          :input="{ type: 'select', items: { design: 'Design', dev: 'Developer', other: 'Other' } }"
+          :input="{ tag: 'select', options: { design: 'Design', dev: 'Developer', other: 'Other' } }"
         />
         <TalqueiMessage
           :text="occupation"
@@ -66,7 +66,16 @@
         />
         <TalqueiMessage
           text="This plugin can help you build webforms looking like a conversation. If you find this useful, please star us on GitHub!"
-        />
+        >
+          <div class="text-center">
+            <a
+              :href="$options.repository"
+              alt="Open Github"
+            >
+              Open Github ⭐
+            </a>
+          </div>
+        </TalqueiMessage>
       </Talquei>
     </section>
   </main>

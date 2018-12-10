@@ -47,6 +47,11 @@ export default {
   },
 
   props: {
+    input: {
+      type: Object,
+      required: false,
+      default: null,
+    },
     isUser: {
       type: Boolean,
       required: false,
@@ -56,11 +61,6 @@ export default {
       type: String,
       required: true,
       default: '',
-    },
-    input: {
-      type: Object,
-      required: false,
-      default: null,
     },
     value: {
       type: String,

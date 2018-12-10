@@ -1,10 +1,10 @@
 export default (ctx, options, model) => {
-  if (!['text', 'select'].includes(options.type)) {
+  if (!['text', 'select'].includes(options.tag)) {
     throw new Error('[talquei] Invalid input type')
   }
 
-  if (options.type === 'select') {
-    if (!options.items) {
+  if (options.tag === 'select') {
+    if (!options.options) {
       throw new Error('[talquei] You must pass some items to select')
     }
   }
@@ -35,18 +35,23 @@ export default (ctx, options, model) => {
         },
       }, 'Ok')
 
-      if (options.type === 'text') {
+      if (options.tag === 'text') {
+        const { tag, ...attributes } = options
+
         inputEl = [
           h('input', {
             class: ['talquei-form__text'],
-            attrs: options,
+            attrs: {
+              type: 'text',
+              ...attributes,
+            },
             ref: 'text',
             directives: [{ name: 'focus' }],
           }),
           submitButton(() => this.$refs.text.value),
         ]
-      } else if (options.type === 'select') {
-        const itemsKeys = Object.keys(options.items)
+      } else if (options.tag === 'select') {
+        const itemsKeys = Object.keys(options.options)
         inputEl = [h('div', {
           class: ['talquei-form__select'],
         },
@@ -57,10 +62,10 @@ export default (ctx, options, model) => {
             },
             class: 'talquei-form__select__item',
             on: {
-              click: () => emit(options.items[key]),
+              click: () => emit(options.options[key]),
             },
             directives: [index === 0 ? { name: 'focus' } : {}], // focus first item
-          }, options.items[key])
+          }, options.options[key])
         )
         )]
       }
