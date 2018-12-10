@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  test-node-10:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Unit tests
+          command: yarn test
+      - run:
+          name: Lint
+          command: yarn lint
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-node-10
