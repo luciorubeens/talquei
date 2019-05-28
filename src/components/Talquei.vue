@@ -36,6 +36,7 @@ export default {
       submitSlot: this.$slots.submit,
       next: this.next,
       showInput: this.showInput,
+      scrollToTerminal: this.scrollToTerminal,
     }
   },
 
@@ -77,10 +78,14 @@ export default {
   },
 
   updated () {
-    scrollToBottom(this.$refs.terminal)
+    this.scrollToTerminal()
   },
 
   methods: {
+    scrollToTerminal () {
+      scrollToBottom(this.$refs.terminal)
+    },
+
     init () {
       this.collectMessages()
       this.step = 0

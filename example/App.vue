@@ -46,12 +46,8 @@
         class="bot"
         :style="{ height: `${height}px` }"
       >
-        <span slot="avatar">
-          💔
-        </span>
-
         <TalqueiMessage
-          text="Hi there!"
+          text="Hi there! What's your name?"
         />
 
         <TalqueiMessage
@@ -62,8 +58,29 @@
         />
 
         <TalqueiMessage
-          :text="`Hey ${name}, how are you?`"
+          :text="`Great to meet you, ${name}! I'm a web form, what do you do?`"
         />
+
+        <TalqueiMessage
+          v-model="occupation"
+          :input="{ tag: 'select', options: ['Design', 'Developer', 'Other'] }"
+          is-user
+        />
+
+        <TalqueiMessage
+          text="This plugin can help you build webforms looking like a conversation. If you find this useful, please star us on GitHub!"
+        />
+
+        <TalqueiMessage>
+          <div class="text-center">
+            <a
+              :href="$options.repository"
+              alt="Open Github"
+            >
+              Open Github ⭐
+            </a>
+          </div>
+        </TalqueiMessage>
       </Talquei>
     </section>
   </main>

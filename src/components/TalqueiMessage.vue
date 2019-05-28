@@ -1,45 +1,44 @@
 <template>
-  <Transition>
-    <div
-      v-if="isEnabled"
-      :class="isUser ? 'talquei-message--user' : 'talquei-message--app'"
-      class="talquei-message"
-    >
-      <div class="talquei-message__avatar">
-        <div v-if="!isUser">
-          <VNodes
-            v-if="$_avatarSlot"
-            :vnodes="$_avatarSlot"
-          />
-          <span v-else>
-            🤖
-          </span>
-        </div>
-      </div>
-
-      <div class="talquei-message__text">
-        <Transition
-          name="talquei--fade"
-          mode="out-in"
-          :duration="isUser ? 50 : 600"
-        >
-          <span
-            v-if="isPending"
-            key="pending"
-            class="talquei--blink talquei-message__text__pending"
-          >
-            …
-          </span>
-          <span
-            v-else
-            key="text"
-          >
-            {{ formattedText }}
-          </span>
-        </Transition>
+  <div
+    v-if="isEnabled && (text || isUser)"
+    :class="isUser ? 'talquei-message--user' : 'talquei-message--app'"
+    class="talquei-message"
+  >
+    <div class="talquei-message__avatar">
+      <div v-if="!isUser">
+        <VNodes
+          v-if="$_avatarSlot"
+          :vnodes="$_avatarSlot"
+        />
+        <span v-else>
+          🤖
+        </span>
       </div>
     </div>
-  </Transition>
+
+    <div class="talquei-message__text">
+      <Transition
+        name="talquei--fade"
+        mode="out-in"
+        :duration="isUser ? 50 : 600"
+        @after-leave="onAfterLeave"
+      >
+        <span
+          v-if="isPending"
+          key="pending"
+          class="talquei--blink talquei-message__text__pending"
+        >
+          …
+        </span>
+        <span
+          v-else
+          key="text"
+        >
+          {{ formattedText }}
+        </span>
+      </Transition>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -58,6 +57,7 @@ export default {
     $_showInput: 'showInput',
     $_avatarSlot: 'avatarSlot',
     $_submitSlot: 'submitSlot',
+    $_scrollToTerminal: 'scrollToTerminal',
   },
 
   model: {
@@ -110,7 +110,6 @@ export default {
     isEnabled (val) {
       if (val) {
         this.renderInput()
-
         if (!this.isUser) {
           this.showText()
         }
@@ -149,6 +148,10 @@ export default {
       } else {
         setTimeout(() => this.isPending = false, 500)
       }
+    },
+
+    onAfterLeave () {
+      setTimeout(() => this.$_scrollToTerminal(), 100)
     },
 
     run () {
