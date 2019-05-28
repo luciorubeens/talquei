@@ -1,6 +1,6 @@
 {
   "name": "talquei",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Vue components to build webforms looking like a conversation.",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.esm.js",
