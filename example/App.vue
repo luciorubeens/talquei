@@ -33,18 +33,8 @@
     </header>
 
     <section class="content">
-      <EditorWindow
-        :height="height"
-        title="~/Projects/app/index.js"
-        class="editor"
-      >
-        <!-- eslint-disable-next-line vue/no-v-html -->
-        <pre><code v-html="code" /></pre>
-      </EditorWindow>
-
       <Talquei
         class="bot"
-        :style="{ height: `${height}px` }"
       >
         <TalqueiMessage
           text="Hi there! What's your name?"
@@ -87,37 +77,14 @@
 </template>
 
 <script>
-import { EditorWindow } from 'vue-windows'
-import hljs from 'highlight.js/lib/highlight'
 import logoImage from './logo.png'
-
-hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'))
 
 export default {
   repository: 'https://github.com/luciorubeens/talquei',
 
-  components: {
-    EditorWindow,
-  },
-
   data: () => ({
-    height: 350,
     name: '',
     occupation: '',
-    code: hljs.highlight('javascript', `import {Talquei, TalqueiMessage} from 'vue-talquei'
-
-new Vue({
-  el: '#app',
-  render(h) {
-    return h(Talquei, [
-      h(TalqueiMessage, {props: {text: 'Hello!'}})
-    ])
-  }
-})
-
-// see more examples
-// https://github.com/luciorubeens/talquei#usage
-`).value,
   }),
 
   computed: {
@@ -128,12 +95,10 @@ new Vue({
 }
 </script>
 
-<style src="vue-windows/dist/vue-windows.css"></style>
-<style src="highlight.js/styles/androidstudio.css"></style>
 <style>
 body {
-  background-color: #16a085;
-  background-image: linear-gradient(300deg, #16a085 0%, #1abc9c 100%);
+  background-color: #F7FAFC;
+  -webkit-font-smoothing: antialiased;
   margin: 0;
   font-family: 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica Neue', sans-serif;
 }
@@ -174,7 +139,9 @@ a:hover {
 }
 
 .bot {
-  width: 450px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  height: 350px;
+  width: 350px;
   margin-left: .5em;
 }
 

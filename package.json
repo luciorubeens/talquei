@@ -49,7 +49,6 @@
     "eslint": "^5.16.0",
     "eslint-config-posva": "^2.0.3",
     "gh-pages": "^2.0.1",
-    "highlight.js": "^9.15.6",
     "jest": "^24.8.0",
     "node-sass": "^4.12.0",
     "poi": "^12.6.10",
@@ -59,7 +58,6 @@
     "sass-loader": "^7.1.0",
     "vue": "^2.6.10",
     "vue-jest": "^3.0.4",
-    "vue-template-compiler": "^2.6.10",
-    "vue-windows": "^0.3.0"
+    "vue-template-compiler": "^2.6.10"
   }
 }

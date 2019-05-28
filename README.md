@@ -232,13 +232,13 @@ Search the next message. Nested messages will inject this method to call when fi
 
 #### Props
 
-| Name       | Description                                         | Type      | Default  |
-| ---------- | --------------------------------------------------- | --------- | -------- |
-| `input  `  | Request a user input [See details](#input-object)   | `Object`  | `null`   |
-| `isUser`   | Define as a message written by the user             | `Boolean` | `false`  |
-| `text`     | Text to be displayed, if `isUser` will not be typed | `String`  | `null`   |
-| `value`    | Useful only for use in `v-model`                    | `String`  | `null`   |
-| `template` | Formats user input                                  | `String`  | `{text}` |
+| Name       | Description                                         | Type      | Default       |
+| ---------- | --------------------------------------------------- | --------- | ------------- |
+| `input  `  | Request a user input [See details](#input-object)   | `Object`  | `undefined`   |
+| `isUser`   | Define as a message written by the user             | `Boolean` | `false`       |
+| `text`     | Text to be displayed, if `isUser` will not be typed | `String`  | `undefined`   |
+| `value`    | Useful only for use in `v-model`                    | `String`  | `undefined`   |
+| `template` | Formats user input                                  | `String`  | `{text}`      |
 
 ##### `input` object
 
