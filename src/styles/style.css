@@ -5,7 +5,8 @@
   border: 1px solid #dae1e7;
   border-radius: 5px;
   background-color: #ffffff;
-  color: #22292f;
+  color: #2D3748;
+  min-width: 350px;
 }
 
 .talquei-terminal {
@@ -16,39 +17,54 @@
 
 .talquei-message {
   display: flex;
-  align-items: flex-start;
   margin-bottom: 0.5rem;
 }
 
+.talquei-message__text__pending {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
 .talquei-message--app {
+  align-items: flex-start;
   flex-direction: row;
   padding-right: 2rem;
 
 }
 .talquei-message--app .talquei-message__text {
-  background-color: #f1f5f8;
+  background-color: rgb(86, 128, 248);
+  color: #ffffff;
+  border-top-left-radius: 0px;
+  margin-top: .5rem;
 }
 
 .talquei-message--user {
+  align-items: flex-end;
   flex-direction: row-reverse;
   padding-left: 2rem;
 }
 
 .talquei-message--user .talquei-message__text {
-  background-color: #2779bd;
-  color: #ffffff;
+  background-color: #ffffff;
+  border: 1px solid #dae1e7;
+  border-bottom-right-radius: 0px;
 }
 
 .talquei-message__text {
+  line-height: 1.5rem;
   display: inline-block;
-  border-radius: 20px;
+  border-radius: 10px;
   font-size: 1rem;
   background-color: #f1f5f8;
-  padding: 0.5rem 1rem;
+  padding: .7rem 1rem;
+  font-weight: 400;
+  overflow-wrap: break-word;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.05);
 }
 
 .talquei-inputbar {
-  padding: 1rem;
+  position: relative;
+  padding: .8rem 1rem;
   background-color: inherit;
   border-top: 1px solid #dae1e7;
   background-color: #f8fafc;
@@ -56,37 +72,42 @@
 
 .talquei-form {
   display: flex;
-  align-items: center;}
+  align-items: center;
+}
 
 .talquei-form__text {
   flex: 1 1 0%;
   font-size: 1rem;
   border: none;
-  margin-right: 0.5rem;
+  padding-right: 3rem;
   font-weight: 400;
   background-color: transparent;
   outline: none;
 }
 
 .talquei-form__submit {
+  transition: background .1s;
   cursor: pointer;
-  background-color: #2779bd;
+  background-color: rgba(86, 128, 248, 0.9);
+  box-shadow: 0 4px 6px -1px rgba(86, 128, 248, 0.3);
   color: #ffffff;
-  font-size: 1rem;
-  text-transform: uppercase;
+  font-size: inherit;
   border-radius: 100px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   border: 0;
   font-weight: 500;
   text-align: center;
-  padding: 0.3rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
 }
 
 .talquei-form__submit:hover {
-  background-color: #3490dc;
+  background-color: rgba(86, 128, 248, 1);
 }
 
 .talquei-form__select {
@@ -110,4 +131,22 @@
 .talquei-form__select__item:focus {
   outline: none;
   border-color: #2779bd;
+}
+
+.talquei--fade-enter-active, .talquei--fade-leave-active {
+  transition: opacity .1s;
+}
+.talquei--fade-enter, .talquei--fade-leave-to {
+  opacity: 0;
+}
+
+
+.talquei--blink {
+  animation: talquei-blinker 1s linear infinite;
+}
+
+@keyframes talquei-blinker {
+  50% {
+    opacity: 0;
+  }
 }
