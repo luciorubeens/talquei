@@ -1,9 +1,15 @@
 module.exports = {
   input: 'src/index.js',
-  exports: 'named',
-  format: ['umd', 'umd-min', 'cjs', 'es'],
-  compress: 'umd',
-  filename: 'talquei[suffix].js',
+  output: {
+    extractCSS: true,
+    moduleName: 'Talquei',
+    format: ['umd', 'umd-min', 'cjs', 'es'],
+    fileName: ({ format }) => {
+      return ['umd', 'umd-min'].includes(format)
+        ? '[name][min].js'
+        : '[name][min].[format].js'
+    },
+  },
   plugins: {
     vue: true,
   },
