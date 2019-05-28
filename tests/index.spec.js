@@ -2,8 +2,6 @@ import { mount } from '@vue/test-utils'
 import Talquei from '../src/components/Talquei'
 import TalqueiMessage from '../src/components/TalqueiMessage'
 
-jest.mock('vue-typed-js/src/components/VueTypedJs.vue', () => {})
-
 global.MutationObserver = class {
   observe (element, initObject) {
     return jest.fn()
@@ -13,6 +11,9 @@ global.MutationObserver = class {
 const provide = {
   next: jest.fn(),
   showInput: jest.fn(),
+  avatarSlot: jest.fn(),
+  submitSlot: jest.fn(),
+  scrollToTerminal: jest.fn(),
 }
 
 describe('Talquei', () => {

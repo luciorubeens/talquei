@@ -1,48 +1,67 @@
 <template>
   <div
-    v-if="!isPending"
+    v-if="isEnabled && (text || isUser)"
     :class="isUser ? 'talquei-message--user' : 'talquei-message--app'"
     class="talquei-message"
   >
     <div class="talquei-message__avatar">
-      <span v-if="!isUser">
-        🤖
-      </span>
+      <div v-if="!isUser">
+        <VNodes
+          v-if="$_avatarSlot"
+          :vnodes="$_avatarSlot"
+        />
+        <span v-else>
+          🤖
+        </span>
+      </div>
     </div>
 
     <div class="talquei-message__text">
-      <span v-if="isUser">
-        {{ text }}
-      </span>
-
-      <VueTypedJs
-        v-else
-        :show-cursor="false"
-        :strings="[text]"
-        :loop="false"
-        @onComplete="onCompleteTyping"
+      <Transition
+        name="talquei--fade"
+        mode="out-in"
+        :duration="isUser ? 50 : 600"
+        @after-leave="onAfterLeave"
       >
-        <span class="typing" />
-      </VueTypedJS>
+        <span
+          v-if="isPending"
+          key="pending"
+          class="talquei--blink talquei-message__text__pending"
+        >
+          …
+        </span>
+        <span
+          v-else
+          key="text"
+        >
+          {{ formattedText }}
+        </span>
+      </Transition>
     </div>
   </div>
 </template>
 
 <script>
-import VueTypedJs from 'vue-typed-js/src/components/VueTypedJs.vue'
+import VNodes from '../utils/v-nodes'
 import InputForm from '../utils/input-form'
 
 export default {
   name: 'TalqueiMessage',
 
-  inject: ['next', 'showInput'],
-
   components: {
-    VueTypedJs,
+    VNodes,
+  },
+
+  inject: {
+    $_next: 'next',
+    $_showInput: 'showInput',
+    $_avatarSlot: 'avatarSlot',
+    $_submitSlot: 'submitSlot',
+    $_scrollToTerminal: 'scrollToTerminal',
   },
 
   model: {
-    prop: 'value',
+    prop: 'text',
     event: 'input',
   },
 
@@ -50,7 +69,7 @@ export default {
     input: {
       type: Object,
       required: false,
-      default: null,
+      default: undefined,
     },
     isUser: {
       type: Boolean,
@@ -59,42 +78,84 @@ export default {
     },
     text: {
       type: String,
-      required: true,
-      default: '',
+      required: false,
+      default: undefined,
     },
-    value: {
+    template: {
       type: String,
       required: false,
-      default: null,
+      default: '{text}',
     },
   },
 
   data: () => ({
+    isEnabled: false,
     isPending: true,
   }),
 
+  computed: {
+    hasInput () {
+      return !!this.$slots.default || !!this.input
+    },
+
+    formattedText: {
+      cache: false,
+      get () {
+        return this.template.replace('{text}', this.text)
+      },
+    },
+  },
+
   watch: {
+    isEnabled (val) {
+      if (val) {
+        this.renderInput()
+        if (!this.isUser) {
+          this.showText()
+        }
+      }
+    },
+    text: {
+      handler (val) {
+        if (val && this.isEnabled) {
+          this.showText()
+        }
+      },
+      immediate: true,
+    },
     isPending (val) {
-      if (!val && this.isUser) {
-        setTimeout(() => this.next(), 1000)
+      if (!val && this.isEnabled && !this.hasInput) {
+        setTimeout(() => this.$_next(), 1500)
       }
     },
   },
 
   methods: {
-    onCompleteTyping () {
-      if (this.$slots.default) {
-        this.showInput(this.$slots.default)
-      } else if (this.input) {
-        const inputComponent = InputForm(this, this.input, this.$options.model)
-        this.showInput(inputComponent)
+    renderInput () {
+      setTimeout(() => {
+        if (this.$slots.default) {
+          this.$_showInput(this.$slots.default)
+        } else if (this.input) {
+          const inputComponent = InputForm(this, this.input, this.$options.model)
+          this.$_showInput(inputComponent)
+        }
+      }, 500)
+    },
+
+    showText () {
+      if (this.isUser) {
+        this.isPending = false
       } else {
-        this.next()
+        setTimeout(() => this.isPending = false, 500)
       }
     },
 
+    onAfterLeave () {
+      setTimeout(() => this.$_scrollToTerminal(), 100)
+    },
+
     run () {
-      this.isPending = false
+      this.isEnabled = true
     },
   },
 }

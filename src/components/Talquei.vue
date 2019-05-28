@@ -32,8 +32,11 @@ export default {
 
   provide () {
     return {
+      avatarSlot: this.$slots.avatar,
+      submitSlot: this.$slots.submit,
       next: this.next,
       showInput: this.showInput,
+      scrollToTerminal: this.scrollToTerminal,
     }
   },
 
@@ -50,8 +53,8 @@ export default {
   },
 
   data: () => ({
-    step: null,
-    inputNode: null,
+    step: undefined,
+    inputNode: undefined,
     messages: [],
   }),
 
@@ -63,7 +66,7 @@ export default {
 
   watch: {
     step (val) {
-      this.inputNode = null
+      this.inputNode = undefined
       this.runMessage(this.messages[val])
     },
   },
@@ -75,21 +78,25 @@ export default {
   },
 
   updated () {
-    scrollToBottom(this.$refs.terminal)
+    this.scrollToTerminal()
   },
 
   methods: {
+    scrollToTerminal () {
+      scrollToBottom(this.$refs.terminal)
+    },
+
     init () {
       this.collectMessages()
       this.step = 0
     },
 
     next () {
-      this.inputNode = null
+      this.inputNode = undefined
       this.collectMessages()
       const nextStep = this.step + 1
       if (nextStep < this.totalSteps) {
-        this.step = nextStep
+        setTimeout(() => this.step = nextStep, 500)
       } else {
         this.emitComplete()
       }
