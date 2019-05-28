@@ -68,13 +68,16 @@ The `Talquei` component should wrapper any `TalqueiMessage`:
 
 You can request a user entry by prop or slot. The prop will basically inject your tag into a form and fill the entry in the `v-model`.
 
+<details><summary>Example</summary>
+
 ```vue
 <template>
   <Talquei>
+    <TalqueiMessage text="What's your name?" />
     <TalqueiMessage
       v-model="name"
-      text="What's your name?"
-      :input="{ tag: 'text' }"
+      :input="{ tag: 'text', placeholder: 'Enter your name' }"
+      is-user
     />
   </Talquei>
 </template>
@@ -87,18 +90,41 @@ export default {
 }
 </script>
 ```
+</details>
 
-### Predefined answers
+### Format user input
 
-If you need predefined answers (such as the `select` or `radio` tag) you can set `input.type = 'select'` and pass your object in the `options` field:
+When the user enters the text, you can format it using the prop `template`:
+
+<details><summary>Example</summary>
 
 ```vue
 <template>
   <Talquei>
     <TalqueiMessage
+      :input="{ tag: 'text', placeholder: 'Enter your name' }"
+      template="My name is {text}"
+      is-user
+    />
+  </Talquei>
+</template>
+```
+</details>
+
+### Predefined answers
+
+If you need predefined answers (such as the `select` or `radio` tag) you can set `input.type = 'select'` and pass your object in the `options` field:
+
+<details><summary>Example</summary>
+
+```vue
+<template>
+  <Talquei>
+    <TalqueiMessage text="Which front-end framework do you prefer?" />
+    <TalqueiMessage
       v-model="name"
-      text="Which front-end framework do you prefer?"
       :input="{ tag: 'select', options: frameworks }"
+      is-user
     />
   </Talquei>
 </template>
@@ -115,39 +141,46 @@ export default {
 }
 </script>
 ```
+</details>
 
 ### Conditional messages
 
 Use when you want the `v-if` attribute to display conditional messages:
 
+<details><summary>Example</summary>
+
 ```vue
 <template>
   <Talquei>
+    <TalqueiMessage text="Which front-end framework do you prefer?" />
     <TalqueiMessage
-      v-model="answer"
-      text="Which front-end framework do you prefer?"
+      v-model="name"
       :input="{ tag: 'select', options: frameworks }"
+      is-user
     />
-
+    <TalqueiMessage text="What plugins do you usually use in your projects?" />
     <TalqueiMessage
       v-if="answer === 'vue'"
       v-model="plugin"
-      text="What plugins do you usually use in your projects?"
       :input="{ tag: 'text', placeholder: 'talquei' }"
+      is-user
     />
   </Talquei>
 </template>
 </script>
 ```
+</details>
 
 ### Using slots
 
 If you need to build more complex input (like validations, custom components) you can use slots. After the completion remeber to call the `next()` method from the `Talquei` component.
 
+<details><summary>Example</summary>
+
 ```vue
 <template>
   <Talquei ref="talquei">
-    <TalqueiMessage :text="Hello">
+    <TalqueiMessage text="Hello">
       <form @submit.stop="onSubmit">
         <input ref="input" type="text">
         <button>Ok</button>
@@ -167,6 +200,7 @@ export default {
 }
 </script>
 ```
+</details>
 
 ## 🔎 API
 
@@ -198,12 +232,13 @@ Search the next message. Nested messages will inject this method to call when fi
 
 #### Props
 
-| Name      | Description                                         | Type      | Default |
-| --------- | --------------------------------------------------- | --------- | ------- |
-| `input  ` | Request a user input [See details](#input-object)   | `Object`  | `null`  |
-| `isUser`  | Define as a message written by the user             | `Boolean` | `false` |
-| `text`    | Text to be displayed, if `isUser` will not be typed | `String`  | `null`  |
-| `value`   | Useful only for use in `v-model`                    | `String`  | `null`  |
+| Name       | Description                                         | Type      | Default  |
+| ---------- | --------------------------------------------------- | --------- | -------- |
+| `input  `  | Request a user input [See details](#input-object)   | `Object`  | `null`   |
+| `isUser`   | Define as a message written by the user             | `Boolean` | `false`  |
+| `text`     | Text to be displayed, if `isUser` will not be typed | `String`  | `null`   |
+| `value`    | Useful only for use in `v-model`                    | `String`  | `null`   |
+| `template` | Formats user input                                  | `String`  | `{text}` |
 
 ##### `input` object
 
@@ -219,6 +254,7 @@ Will create a basic form from the `tag` informed, should not be defined if you p
 | Name      | Description                                                  |
 | --------- | ------------------------------------------------------------ |
 | `default` | Use this if you need more complex or personalized user input |
+| `avatar`  | Change the element used as avatar. Default is "🤖"           |
 
 ## 🤝 Contribute
 
