@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="./.github/example.gif" width="45%"/>
+  <img src="./.github/example.gif" />
 </p>
 
 ## 🧐 Why?

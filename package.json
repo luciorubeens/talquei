@@ -1,6 +1,6 @@
 {
   "name": "talquei",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue components to build webforms looking like a conversation.",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.esm.js",
@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "build:example": "poi --prod",
-    "build": "bili",
+    "build": "bili --bundle-node-modules",
     "example": "poi --serve",
     "gh": "npm run build:example && gh-pages -d example/dist",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
