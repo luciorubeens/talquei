@@ -51,7 +51,7 @@
     "eslint-config-posva": "^2.0.3",
     "gh-pages": "^2.0.1",
     "jest": "^24.8.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "poi": "^12.6.10",
     "postcss-preset-env": "^6.6.0",
     "regenerator-runtime": "^0.13.2",
